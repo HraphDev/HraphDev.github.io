@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de Bord - Gestion du Marché</title>
+
+  <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <link href="../assets/css/tailwind.min.css" rel="stylesheet">
+ 
+  <link href="../assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/sidebar.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/search.css">
+
+  <link rel="stylesheet" href="../assets/css/darklight.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+ .navbar-dark .navbar-nav .nav-link {
+  color: rgba(0, 0, 0, 0.8); 
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: rgba(0, 0, 0, 1); 
+}
+
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; 
+  overflow: hidden;
+}
+
+#navBackground {
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1.5; 
+}
+
+
+.navbar {
+  z-index: 10;
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.8); 
+  box-shadow: none; 
+
+}
+
+
+
+.ft {
+  z-index: 1;
+}
+.btn {
+  z-index: 1000;
+  position: relative;
+}
+</style>
+</head>
+
+  
+<body class="bg-light">
+  <div class="video-container">
+    <video autoplay muted loop id="navBackground">
+      <source src="../assets/videos/video2.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent px-5">
+    <a class="navbar-brand" href="#">
+      <img src="../assets/videos/Electrolux_logo.svg" alt="Gestion du Marché Logo" style="height: 30px;">
+    </a>
+    <div class="d-flex ms-auto align-items-center">
+      <div class="search-container">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search products...">
+        <div id="searchResults" class="search-results"></div>
+      </div>
+      <div class="dropdown me-3">
+        <button class="btn btn-link text-dark dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Language
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+          <li><a class="dropdown-item" href="#">Français</a></li>
+          <li><a class="dropdown-item" href="#">English</a></li>
+          <li><a class="dropdown-item" href="#">Español</a></li>
+        </ul>
+      </div>
+      <div class="theme-toggle mt-3 mb-3">
+        <button id="themeToggle" class="btn btn-outline-light text-black">
+          <i class="fas fa-moon"></i> 
+        </button>
+      </div>
+    </div>
+      <a href="../pages/login.html" class="text-dark"><i class="fas fa-sign-out-alt fa-lg"></i></a>
+    </div>
+  </nav>
+
+
+  <section>
+    <div class="container-fluid">
+      <div class="row d-flex">
+        <div id="sidebar" class="col-md-2 text-white vh-100 px-4 sidebar">
+    <div class="sidebar-video-container">
+      <video autoplay muted loop class="sidebar-video">
+          <source src="../assets/videos/sidebar-bg.mp4" type="video/mp4">
+      </video>
+      <div class="sidebar-overlay"></div>
+  </div>
+
+  <ul class="nav flex-column">
+    <br>
+    <li class="nav-item mb-3">
+      <a  data-translate-key="home" href="../index.html" class="nav-link text-white"><i class="fas fa-home me-2"></i>Home</a>
+    </li>
+    <li class="nav-item mb-3">
+      <a   data-translate-key="consoles" href="../pages/Consoles.html" class="nav-link text-white"><i class="fas fa-gamepad me-2"></i>Consoles</a>
+    </li>
+    <li class="nav-item mb-3">
+      <a  data-translate-key="games" href="../pages/Games.html" class="nav-link text-white"><i class="fas fa-dice me-2"></i>Games</a>
+    </li>
+    <li class="nav-item mb-3">
+      <a  data-translate-key="computers" href="../pages/Pc.html" class="nav-link text-white"><i class="fas fa-laptop me-2"></i>Computers</a>
+    </li>
+    <li class="nav-item mb-3">
+      <a  data-translate-key="phones" href="../pages/phones.html" class="nav-link text-white"><i class="fas fa-mobile-alt me-2"></i>Phones</a>
+    </li>
+    <li class="nav-item mb-3">
+      <a  data-translate-key="televisions" href="../pages/Tv.html" class="nav-link text-white"><i class="fas fa-tv me-2"></i>Televisions</a>
+    </li>
+    <li class="nav-item mb-3">
+      <a  data-translate-key="clients" href="../pages/Clients.html" class="nav-link text-white">Clients</a>
+    </li>
+    <li class="nav-item mb-3">
+      <a  data-translate-key="team" href="../pages/users.html" class="nav-link text-white">Team</a>
+    </li>
+  </ul>
+</div>
+
+<div class="col-md-10 p-4">
+  <center>
+  <button class="btn btn2 mb-3" style=" background-color: black;
+  color: white;"  onclick="showAddProductModal()" data-translate-key="AddComputers">Add TV</button>
+</center>  
+      <div class="row" id="productCards">
+      </div>
+      
+      
+
+       <!-- Add/Edit Product Modal -->
+       <div class="modal" id="productModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add/Edit TV</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="productForm">
+                <input type="hidden" id="productIndex" value="">
+                <label for="productName">Name:</label>
+                <input type="text" id="productName" class="form-control" required>
+                <label for="productPrice">Price:</label>
+                <input type="number" id="productPrice" class="form-control" required>
+                <label for="productQuantity">Quantity:</label>
+                <input type="number" id="productQuantity" class="form-control" required>
+                <label for="productDescription">Description:</label>
+                <textarea id="productDescription" class="form-control" required></textarea>
+                <label for="productImage">Image:</label>
+                <input type="file" id="productImage" class="form-control" accept="image/*"><br>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<!-- View Product Modal -->
+<div class="modal" id="viewProductModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Product Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5 id="viewProductName"></h5>
+        <p id="viewProductDescription"></p>
+        <p><strong>Price:</strong> $<span id="viewProductPrice"></span></p>
+        <p><strong>Quantity:</strong> <span id="viewProductQuantity"></span></p>
+        <img id="viewProductImage" class="img-fluid" style="max-height: 200px;" />
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+  </section>
+<footer class="bg-dark text-white text-center py-4 ft" style="position: relative; bottom: 0; width: 100%; left: 0;">
+  <p data-translate-key="Contact">&copy; 2025 ElectroLux| Contact: AchrafBouhia@gmail.com</p>
+</footer>
+  </body>
+
+
+<script>const pageKey = "televisions"; 
+</script>
+<script>
+   document.addEventListener('DOMContentLoaded', () => {
+    initializeSearch();
+  });
+</script>
+  <script src="../assets/js/scripts.js"></script>
+  <script src="../assets/js/carousel.js"> </script>
+  <script src="../assets/js/charts.js"></script>
+  <script src="../assets/js/translation.js"></script>
+  <script src="../assets/js/search.js"></script>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/cruds.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script></body>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../node_modules/chart.js/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</html>

@@ -1,0 +1,129 @@
+ /* Add these styles to your existing CSS */
+
+/* General styles for form */
+#addUserForm {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #2d3238; /* Ensure this is not transparent */
+    color: white; /* Ensure text is readable */
+    padding: 20px; /* Add padding for aesthetics */
+    border-radius: 8px; /* Add rounded corners */
+    z-index: 1;
+}
+
+
+/* Form input and select styles */
+#addUserForm .form-control, 
+#addUserForm .form-select {
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    z-index: 1;
+
+}
+
+#addUserForm .form-control:focus, 
+#addUserForm .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 8px rgba(13, 110, 253, 0.5);
+}
+
+/* Button styles */
+#addUserForm .btn {
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+#addUserForm .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Table styles */
+.table {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table th, .table td {
+  background-color: rgba(0, 0, 0, 0.6); /* Transparent table background */
+}
+
+.table-hover tbody tr:hover {
+    background-color: #3a3f44;
+}
+
+/* Modal styles */
+.modal-content {
+  background-color: rgba(0, 0, 0, 0.7); /* Transparent modal background */
+}
+
+.modal-header, .modal-footer {
+    border-color: #444b52;
+}
+
+.modal-header .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #addUserForm .row {
+        flex-direction: column;
+    }
+
+    #addUserForm .col-md-4 {
+        width: 100%;
+    }
+}
+
+.table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: #2d3238;
+    color: white;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 1);
+}
+
+.btn-close-white:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 1);
+}
+
+.status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.status-active {
+    background-color: #198754;
+}
+
+.status-inactive {
+    background-color: #dc3545;
+}
+
+
+.d-flex {
+  display: flex;
+}
+
+* Adjust content readability */
+.main-content, .navbar, .sidebar {
+    background: rgba(0, 0, 0, 0.7); /* Adds a semi-transparent background */
+    backdrop-filter: blur(5px); /* Adds blur effect for better text clarity */
+    color: white;
+}
+.main-content {
+  padding: 20px;
+  flex-grow: 1;
+  min-height: calc(100vh - 56px);
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.4); /* Slight transparency to see the video */
+  color: white; /* Keep the text readable */
+  z-index: 1;;
+}
+

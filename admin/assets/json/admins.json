@@ -1,0 +1,18 @@
+{
+    "admins": [
+      {
+        "id": 1,
+        "email": "admin@electros.com",
+        "password": "admin123",
+        "role": "admin",
+        "name": "Main Admin"
+      },
+      {
+        "id": 2,
+        "email": "admin2@electros.com", 
+        "password": "admin456",
+        "role": "admin",
+        "name": "Second Admin"
+      }
+    ]
+  }
